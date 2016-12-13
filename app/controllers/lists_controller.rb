@@ -6,7 +6,7 @@ class ListsController < ApplicationController
   end
 
   def show
-
+    @list = current_user.lists.find(params[:id])
   end
 
   def new
@@ -14,15 +14,22 @@ class ListsController < ApplicationController
   end
 
   def edit
-
+    @list = current_user.lists.find(params[:id])
   end
 
   def create
-
+    @list = current_user.lists.build(list_params)
+    if @list.save
+      redirect_to list_path(@list)
+    else
+      render 'new'
+    end
   end
 
   def update
-
+    @list = List.find(params[:id])
+    @list.update(list_params)
+    redirect_to list_path(@list)
   end
 
   def destroy
@@ -32,6 +39,6 @@ class ListsController < ApplicationController
   private
 
   def list_params
-
+    params.require(:list).permit(:name, :due_date)
   end
 end
