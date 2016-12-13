@@ -1,6 +1,8 @@
 <h1><%=@list.name %></h1><br><br>
 <% @tasks.each do |task| %>
+<hr>
 <%= task.complete %><br>
 <%= task.name %><br>
-
+<%= link_to "Delete", [@list, task], method: 'delete'%><br>
+<hr>
 <% end %>
