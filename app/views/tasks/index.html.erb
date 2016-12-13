@@ -1,0 +1,6 @@
+<h1><%=@list.name %></h1><br><br>
+<% @tasks.each do |task| %>
+<%= task.complete %><br>
+<%= task.name %><br>
+
+<% end %>
