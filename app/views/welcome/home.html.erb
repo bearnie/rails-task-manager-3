@@ -1,11 +1,19 @@
 
+<div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 col-sm-12 text-center bg-white">
+        <h1 class="log-in">Please Log In</h1>
+        <% if logged_in? %>
+          <p>Signed in as <%= current_user.email %></p>
+          <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %>
+        <% else %>
+        <p>Don't have an account? <%= link_to "Sign up", new_user_registration_path %></p>
+        <p>or</p>
+        <p><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></p>
+        <% end %>
 
-<% if logged_in? %>
-  <p>Signed in as <%= current_user.email %></p>
-  <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path %> <br>
-
-  <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-
-<% end %>
+      </div>
+    </div>
+  </div>
+</div>
