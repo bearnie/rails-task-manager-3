@@ -1,1 +1,24 @@
+body {
+background: #ff9068;
+background: -webkit-linear-gradient(45deg, #fd746c, #ff9068);
+background: linear-gradient(45deg, #fd746c, #ff9068);
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+color: #2E2E2E;
+}
 
+.bg-white {
+  background-color:white;
+  border-radius:7px;
+  margin-bottom:50px;
+}
+
+.welcome {
+  font-weight:100;
+  font-size: 45px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.welcome span {
+  font-weight:bold;
+}
