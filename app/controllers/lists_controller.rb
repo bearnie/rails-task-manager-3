@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @list = current_user.lists.all
+    @lists = current_user.lists.all
   end
 
   def show
