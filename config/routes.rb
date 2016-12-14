@@ -4,8 +4,6 @@ Rails.application.routes.draw do
       resources :tasks, except: [:index, :show]
     end
     root 'welcome#home'
-    devise_scope :user do
-      root to: "welcome#home"
-    end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
