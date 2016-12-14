@@ -41,7 +41,7 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = @list.tasks.find_by(params[:id])
     @task.destroy
-    redirect_to list_tasks_path(@list)
+    redirect_to list_path(@list)
   end
 
   private

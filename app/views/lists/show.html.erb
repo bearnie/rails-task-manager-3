@@ -24,8 +24,8 @@
               </div>
 
               <div role="group" aria-label="...">
-                <%= button_to "Edit", edit_list_path(), method: 'get', class: "button-small btn light-green"%>
-                <%= button_to "Delete", list_path(), method: 'delete', class: "button-small btn"%>
+                <%= button_to "Edit", edit_list_task_path(@list,task), method: 'get', class: "button-small btn light-green"%>
+                <%= button_to "Delete", list_task_path(@list,task), method: 'delete', class: "button-small btn"%>
               </div>
 
             </li>
