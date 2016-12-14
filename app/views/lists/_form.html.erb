@@ -1,7 +1,5 @@
 <%= form_for @list do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br><br>
-  <%= f.label :due_date %>
-  <%= f.date_field :due_date %><br><br>
-  <%= f.submit %>
+  <%= f.text_field :name, placeholder: "Name", class: "form-control"%>
+  <%= f.date_field :due_date, placeholder:"Due Date", class: "form-control" %>
+  <%= f.submit class: "form-control btn-main sign-up" %>
 <% end %>
