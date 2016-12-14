@@ -8,10 +8,10 @@
   </div>
   <div class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li><a href="/">Home</a></li>
-      <li><a href="#">View All Task Lists</a></li>
-      <li><a href="#">New Task List</a></li>
-      <li><a href="#">Sign Out</a></li>
+      <li><%= link_to "Home", root_path%></li>
+      <li><%= link_to "View All Task Lists", lists_path%></li>
+      <li><%= link_to "New Task List", new_list_path%></li>
+      <li><%= link_to "Sign out", destroy_user_session_path, method: 'delete' %></li>
     </ul>
   </div>
 </nav>
