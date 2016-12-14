@@ -35,9 +35,16 @@
           <ul style="border-bottom:solid 1px #f1f1f1">
             <li style="overflow-x: auto;">
               <a style="color: #44635d; font-size:18px; font-weight:200; line-height:2" class="to-do" href="#"><%= list.name %></a>
-              <div style="float:right;" class="btn-group" role="group" aria-label="...">
+
+              <div style="float:right;">
+                <p style="color: #44635d;font-size: 18px;font-weight: 200;line-height: 2;position: relative;display: inline;">Due Date</p>
+              </div>
+
+              <div role="group" aria-label="...">
                 <a href="#"><button style="font-weight:100;border:none;background-color: #70c1bd; color:white" type="button" class="btn btn-default">Edit</button></a>
                 <a href="#"><button style="font-weight:100;border:none;background-color:#ff7650; color:white" type="button" class="btn btn-default">Delete</button></a>
+                <a href="#"><button style="font-weight:100;border:none;background-color: #70c1bd; color:white" type="button" class="btn btn-default">View Tasks</button></a>
+                <p style="color: #44635d;font-size: 16px;font-weight: 200;line-height: 2;position: relative;display: inline; float:right"><%= list.due_date.strftime("%B %d, %Y")%></p>
               </div>
             </li>
           </ul>
