@@ -12,12 +12,12 @@
             <li class="over-flow">
               <a class="task-list-text" href="#"><%= list.name %></a>
 
-              <div style="float:right;">
+              <div class="float-right">
                 <p class="task-list-text display-inline">Due Date</p>
               </div>
 
               <div role="group" aria-label="...">
-                <%= button_to "View Tasks", list_tasks_path(list), method: 'get', class: "button-small btn light-blue"%>
+                <%= button_to "View Tasks", list_path(list), method: 'get', class: "button-small btn light-blue"%>
                 <%= button_to "Edit", edit_list_path(list), method: 'get', class: "button-small btn light-green"%>
                 <%= button_to "Delete", list_path(list), method: 'delete', class: "button-small btn"%>
                 <p class="task-list-text due-date display-inline"><%= list.due_date.strftime("%B %d, %Y")%></p>

@@ -11,7 +11,7 @@ class TasksController < ApplicationController
   end
 
   def new
-    @list = List.find_by(params[:list_id])
+    @list = List.find(params[:list_id])
     @task = @list.tasks.build
   end
 
@@ -21,7 +21,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @list = List.find_by(params[:list_id])
+    @list = List.find(params[:list_id])
     @task = @list.tasks.build(task_params)
     if @task.save
       redirect_to list_tasks_path(@list)
