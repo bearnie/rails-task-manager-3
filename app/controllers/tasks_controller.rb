@@ -16,7 +16,8 @@ class TasksController < ApplicationController
   end
 
   def edit
-    @list = List.find_by(params[:list_id])
+    @list = List.find(params[:list_id])
+    puts @list.id
     @task = Task.find(params[:id])
   end
 
@@ -24,17 +25,17 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = @list.tasks.build(task_params)
     if @task.save
-      redirect_to list_tasks_path(@list)
+      redirect_to list_path(@list)
     else
       render 'new'
     end
   end
 
   def update
-    @list = List.find_by(params[:list_id])
+    @list = List.find(params[:list_id])
     @task = Task.find(params[:id])
     @task.update(task_params)
-    redirect_to list_tasks_path(@list)
+    redirect_to list_path(@list)
   end
 
   def destroy
