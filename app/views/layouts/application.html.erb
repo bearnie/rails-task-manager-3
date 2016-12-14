@@ -14,16 +14,7 @@
   <body>
 
 
-    <% if logged_in? %>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1 class="welcome color-white"><%="Welcome to the <span>Task</span> app #{current_user.email}!"%></h1>
-        </div>
-      </div>
-    </div>
 
-    <% else %>
     <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
@@ -32,7 +23,6 @@
       </div>
     </div>
 
-    <% end %>
     <%= yield %>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>

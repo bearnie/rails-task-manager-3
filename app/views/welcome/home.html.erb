@@ -4,16 +4,18 @@
     <div class="row">
       <div class="col-md-4 col-md-offset-4 col-sm-12 text-center bg-white">
         <% if logged_in? %>
-          <p>Signed in as <%= current_user.email %></p>
+          <div>
+            <a href="#" class="text-center btn-secondary">View All Task Lists</a>
+            <a href="#" class="text-center btn-secondary">New Task List</a>
+            <a href="#" class="text-center btn-secondary">Sign Out</a>
+          </div>
           <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %>
         <% else %>
         <div>
 
-          <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Log In</a></li>
             <li role="presentation"><a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Sign Up</a></li>
-
           </ul>
 
           <!-- Tab panes -->
@@ -23,19 +25,12 @@
               <%= render 'devise/sessions/new' %>
             </div>
             <div role="tabpanel" class="tab-pane" id="signup">
-              <h1 class="log-in">Sign Up</h1>
+              <h1 class="log-in">Please Sign Up</h1>
               <%= render 'devise/registrations/new' %>
             </div>
           </div>
-
         </div>
-
-
-        <!-- <%= link_to "Sign In", new_user_session_path %>
-        <p>Don't have an account? <%= link_to "Sign up", new_user_registration_path %></p>
-        <p>or</p>
-        <p><%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %></p>
-        <% end %> -->
+        <% end %>
 
       </div>
     </div>
