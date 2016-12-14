@@ -16,9 +16,9 @@
         <h1 class="log-in text-center">Task List</h1>
         <hr>
         <% @lists.each do |list| %>
-          <ul style="border-bottom:solid 1px #f1f1f1">
-            <li style="overflow-x: auto;">
-              <a style="color: #44635d; font-size:18px; font-weight:200; line-height:2" class="to-do" href="#"><%= list.name %></a>
+          <ul>
+            <li class="over-flow">
+              <a class="task-list-text" href="#"><%= list.name %></a>
 
               <div style="float:right;">
                 <p class="task-list-text display-inline">Due Date</p>
