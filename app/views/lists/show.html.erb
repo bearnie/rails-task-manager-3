@@ -24,14 +24,14 @@
               </div>
 
               <div role="group" aria-label="...">
-                <!-- <%= button_to "View Tasks", list_path(), method: 'get', class: "button-small btn light-blue"%> -->
                 <%= button_to "Edit", edit_list_path(), method: 'get', class: "button-small btn light-green"%>
                 <%= button_to "Delete", list_path(), method: 'delete', class: "button-small btn"%>
-
               </div>
+
             </li>
           </ul>
         <% end %>
+        <%= link_to "New Task", list_path(), method: 'get', class: "text-center form-control btn-main margin-top-25"%>
       </div>
     </div>
   </div>
