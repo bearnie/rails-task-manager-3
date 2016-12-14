@@ -22,3 +22,64 @@ color: #2E2E2E;
 .welcome span {
   font-weight:bold;
 }
+
+.form-control {
+  height: 50px;
+  margin-bottom: 25px;
+  font-size:16px;
+}
+
+.form-control.btn-main {
+  background: #59B2E0;
+  color:white;
+  font-size: 22px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  border: 0;
+  border-bottom: 2px solid #4e9ac3;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 -2px #4e9ac3;
+  box-shadow: inset 0 -2px #4e9ac3;
+  height: 54px;
+}
+
+.form-control.btn-main.sign-up {
+  background: #1CB94E;
+  border-bottom: 2px solid #199841;
+  -webkit-box-shadow: inset 0 -2px #199841;
+  box-shadow: inset 0 -2px #199841;
+}
+
+.log-in {
+  font-weight: 200;
+  color: #3e3c3c;
+}
+
+.nav-tabs>li:nth-child(2) {
+  float: right;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    border: none;
+    color: #029f5b;
+    font-size:18px;
+    background-color:initial;
+}
+
+.nav-tabs>li>a {
+    margin-right: 2px;
+    line-height: 1.42857143;
+    border: 1px solid transparent;
+    border-radius: 4px 4px 0 0;
+    font-size:15px;
+    font-weight: bold;
+    color: #666;
+}
+
+.nav-tabs>li>a:hover {
+  border-color: transparent;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+  text-decoration: none;
+  background-color: inherit;
+}

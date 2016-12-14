@@ -7,8 +7,30 @@
           <p>Signed in as <%= current_user.email %></p>
           <%= link_to "Sign out", destroy_user_session_path, method: 'delete' %>
         <% else %>
-        <h1 class="log-in">Please Log In</h1>
-        <%= render 'devise/sessions/new' %>
+        <div>
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#login" aria-controls="login" role="tab" data-toggle="tab">Log In</a></li>
+            <li role="presentation"><a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Sign Up</a></li>
+
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="login">
+              <h1 class="log-in">Please Log In</h1>
+              <%= render 'devise/sessions/new' %>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="signup">
+              <h1 class="log-in">Sign Up</h1>
+              <%= render 'devise/registrations/new' %>
+            </div>
+          </div>
+
+        </div>
+
+
         <!-- <%= link_to "Sign In", new_user_session_path %>
         <p>Don't have an account? <%= link_to "Sign up", new_user_registration_path %></p>
         <p>or</p>
