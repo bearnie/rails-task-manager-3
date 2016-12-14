@@ -4,4 +4,6 @@ class List < ActiveRecord::Base
 
   validates :name, presence: true
   validates :due_date, presence: true
+
+  scope :over_due, -> { where('due_date <= ?', Date.today)}
 end
