@@ -37,14 +37,14 @@
               <a style="color: #44635d; font-size:18px; font-weight:200; line-height:2" class="to-do" href="#"><%= list.name %></a>
 
               <div style="float:right;">
-                <p style="color: #44635d;font-size: 18px;font-weight: 200;line-height: 2;position: relative;display: inline;">Due Date</p>
+                <p class="task-list-text display-inline">Due Date</p>
               </div>
 
               <div role="group" aria-label="...">
+                <%= button_to "View Tasks", list_tasks_path(list), method: 'get', class: "button-small btn light-blue"%>
                 <%= button_to "Edit", edit_list_path(list), method: 'get', class: "button-small btn light-green"%>
                 <%= button_to "Delete", list_path(list), method: 'delete', class: "button-small btn"%>
-                <%= button_to "View Tasks", list_tasks_path(list), method: 'get', class: "button-small btn light-blue"%>
-                <p style="color: #44635d;font-size: 16px;font-weight: 200;line-height: 2;position: relative;display: inline; float:right"><%= list.due_date.strftime("%B %d, %Y")%></p>
+                <p class="task-list-text due-date display-inline"><%= list.due_date.strftime("%B %d, %Y")%></p>
               </div>
             </li>
           </ul>
