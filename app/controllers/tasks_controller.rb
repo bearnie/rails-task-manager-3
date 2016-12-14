@@ -27,6 +27,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to list_path(@list)
     else
+      flash[:notice] = "Error"
       render 'new'
     end
   end
