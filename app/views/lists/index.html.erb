@@ -1,7 +1,7 @@
 
 <% @lists.each do |list| %>
 <%= list.name %>
-<%= link_to "Delete", list_path(list), method: 'delete'%><br>
+<%= button_to "Delete", list_path(list), method: 'delete', class: "button-small btn btn-default "%><br>
 <% end %>
 
 
@@ -41,9 +41,9 @@
               </div>
 
               <div role="group" aria-label="...">
-                <a href="#"><button style="font-weight:100;border:none;background-color: #70c1bd; color:white" type="button" class="btn btn-default">Edit</button></a>
-                <a href="#"><button style="font-weight:100;border:none;background-color:#ff7650; color:white" type="button" class="btn btn-default">Delete</button></a>
-                <a href="#"><button style="font-weight:100;border:none;background-color: #70c1bd; color:white" type="button" class="btn btn-default">View Tasks</button></a>
+                <%= button_to "Edit", edit_list_path(list), method: 'get', class: "button-small btn light-green"%>
+                <%= button_to "Delete", list_path(list), method: 'delete', class: "button-small btn"%>
+                <%= button_to "View Tasks", list_tasks_path(list), method: 'get', class: "button-small btn light-blue"%>
                 <p style="color: #44635d;font-size: 16px;font-weight: 200;line-height: 2;position: relative;display: inline; float:right"><%= list.due_date.strftime("%B %d, %Y")%></p>
               </div>
             </li>
