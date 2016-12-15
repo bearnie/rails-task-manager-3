@@ -4,6 +4,10 @@ class TasksController < ApplicationController
   def index
     @list = List.find(params[:list_id])
     @tasks = @list.tasks
+    respond_to do |format|
+      format.html { render :index}
+      format.json { render json: @tasks}
+    end
   end
 
   def show
