@@ -7,6 +7,10 @@ class ListsController < ApplicationController
 
   def show
     @list = current_user.lists.find(params[:id])
+    respond_to do |format|
+      format.html { render :show}
+      format.json { render json: @list}
+    end
   end
 
   def new
