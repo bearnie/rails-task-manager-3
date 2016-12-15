@@ -7,9 +7,9 @@
       <%= render 'layouts/nav' %>
 
       <div>
-        <h1 class="task-name log-in text-center"><%= @list.name %></h1>
+        <h1 class="list-name log-in text-center"><%= @list.name %></h1>
         <hr>
-        <p class="task-list-text"><span class="bold-text">Due Date: </span><span class="float-right"><%= @list.due_date.strftime("%B %d, %Y")%></span></p>
+        <p class="task-list-text"><span class="bold-text">Due Date: </span><span class="float-right due-date"><%= @list.due_date.strftime("%B %d, %Y")%></span></p>
         <p class="task-list-text"><span class="border-bottom bold-text">Tasks</span><span class="task-list-tesk float-right border-bottom bold-text">Completed?</span></p>
 
         <% @list.tasks.each do |task| %>
@@ -40,16 +40,27 @@
 <script type="text/javascript" charset="utf-8">
 
 $(function () {
+  nextTaskList();
+});
+
+function nextTaskList () {
   $(".js-next").on("click", function (event) {
     var nextId = parseInt($(".js-next").attr("data-id")) + 2;
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
-      $(".task-name").text(list["name"])
+      var date = list["due_date"]
+      console.log(date.getHours())
+      $(".list-name").text(list["name"])
+      $(".due-date").text(list["due_date"])
       $(".js-next").attr("data-id", list["id"]);
-
+      getTaskInfo(nextId);
     });
     event.preventDefault();
   });
-});
+}
+
+function getTaskInfo (listId) {
+console.log("hi")
+}
 
 </script>
