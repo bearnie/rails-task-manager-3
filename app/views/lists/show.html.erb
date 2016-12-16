@@ -49,7 +49,8 @@ $(function () {
 
 function nextTaskList () {
   $(".js-next").on("click", function (event) {
-    var nextId = parseInt($(".js-next").attr("data-id")) + 2;
+    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+    var setId = $(".js-next").attr("data-id", nextId)
     window.history.pushState('page2', 'Title', '/lists/' + nextId);
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
@@ -61,7 +62,10 @@ function nextTaskList () {
       getTaskInfo(tasks, list);
     })
     .fail(function(){
-      alert("error")
+      nextId += 1
+      console.log(nextId)
+
+      alert("sorry")
     })
     event.preventDefault();
   });
