@@ -68,7 +68,6 @@ function nextTaskList () {
     var setId = $(".js-next").attr("data-id", nextId)
 
 
-    console.log("setting button to " + nextId)
     $(".test123").html("");
 
 
@@ -76,6 +75,7 @@ function nextTaskList () {
 
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
+      console.log(data)
       var date = list["due_date"]
       var tasks = list["tasks"]
       $(".list-name").text(list["name"])
@@ -84,8 +84,6 @@ function nextTaskList () {
       getTaskInfo(tasks, list);
     })
     .fail(function(){
-      nextId += 1
-      console.log(nextId)
 
       alert("sorry")
     })
@@ -96,7 +94,6 @@ function nextTaskList () {
 function getTaskInfo (tasks, list) {
     token = '<%= form_authenticity_token %>';
   for (i = 0; i < tasks.length; i++){
-
 
     var complete = "";
 
