@@ -29,7 +29,9 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = @list.tasks.build(task_params)
     if @task.save
-      redirect_to list_path(@list)
+      # redirect_to list_path(@list)
+      render json: @task, status: 201
+
     else
       flash[:notice] = "Error"
       render 'new'

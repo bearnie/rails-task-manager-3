@@ -55,6 +55,7 @@
 
 $(function () {
   nextTaskList();
+  newTaskShow();
   newTask();
 });
 
@@ -125,10 +126,20 @@ function getTaskInfo (tasks, list) {
 }
 
 function newTask () {
-  $(".new-task").on("click", function (event) {
+  $('form').submit(function(event) {
     event.preventDefault();
-    $(".create-task").show();
-  });
+    var values = $(this).serialize();
+    console.log(values)
+    var posting = $.post('/lists/17', values);
+
+    posting.done(function(data){
+      var post = data;
+      console.log(post)
+    })
+
+
+  })
 }
+
 
 </script>
