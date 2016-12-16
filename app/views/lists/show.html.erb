@@ -36,8 +36,16 @@
           </ul>
         <% end %>
       </div>
-        <a href="#" class="new-task js-next text-center form-control btn-main margin-top-25" data-id="<%=@list.id%>">New Task</a>
+      <div class="create-task">
+      <h1 class="text-center log-in">Create Your Task</h1>
+      <%= render 'tasks/form' %>
+      </div>
+        <a href="#" class="new-task text-center form-control btn-main margin-top-25" data-id="<%=@list.id%>">New Task</a>
         <!-- <%= link_to "New Task", new_list_task_path(@list), method: 'get', class: "text-center form-control btn-main margin-top-25"%> -->
+
+
+
+
 
       </div>
     </div>
@@ -119,7 +127,7 @@ function getTaskInfo (tasks, list) {
 function newTask () {
   $(".new-task").on("click", function (event) {
     event.preventDefault();
-    console.log("inside newTask")
+    $(".create-task").show();
   });
 }
 
