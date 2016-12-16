@@ -7,5 +7,5 @@ class List < ActiveRecord::Base
 
   scope :over_due, -> { where('due_date <= ?', Date.today)}
 
-  
+
 end

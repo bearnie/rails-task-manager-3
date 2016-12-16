@@ -49,9 +49,8 @@ function nextTaskList () {
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
       var date = list["due_date"]
-      console.log(date.getHours())
       $(".list-name").text(list["name"])
-      $(".due-date").text(list["due_date"])
+      $(".due-date").text(dateParser(date))
       $(".js-next").attr("data-id", list["id"]);
       getTaskInfo(nextId);
     });
