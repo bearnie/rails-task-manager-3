@@ -44,10 +44,11 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    puts params.inspect
     @list = List.find(params[:list_id])
-    puts @list
-    @task = @list.tasks.find_by(params[:id])
-    puts @task
+    puts @list.id
+    @task = @list.tasks.find(params[:id])
+    puts @task.id
     @task.destroy
     redirect_to list_path(@list)
   end
