@@ -112,7 +112,7 @@ function getTaskInfo (tasks, list) {
     } else {
       complete = ""
     }
-    thislistId = list.id
+
     var deleteButton = "<form class='button_to' method='post' action='/lists/" + list.id + "/tasks/" + tasks[i].id + "'><input type='hidden' name='_method' value='delete'><input class='button-small btn' type='submit' value='Delete'><input type='hidden' name='authenticity_token' value=" + token + "></form>"
 
     var editButton = "<form class='button_to margin-right-5' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='Edit'></form>";
@@ -130,11 +130,11 @@ function newTask () {
     event.preventDefault();
     var values = $(this).serialize();
     console.log(values)
-    var posting = $.post('/lists/17', values);
+    var posting = $.post('/lists/17/tasks', values);
 
     posting.done(function(data){
-      var post = data;
-      console.log(post)
+      var task = data;
+      console.log(task.list.id)
     })
 
 
