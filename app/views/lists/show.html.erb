@@ -33,6 +33,10 @@
         <% end %>
         <%= link_to "New Task", new_list_task_path(@list), method: 'get', class: "text-center form-control btn-main margin-top-25"%>
          <a href="#" class="js-next text-center form-control btn-main sign-up" data-id="<%=@list.id%>">Next Task List</a>
+         <div>
+           <ul class="test123">
+           </ul>
+         </div>
       </div>
     </div>
   </div>
@@ -46,6 +50,7 @@ $(function () {
 function nextTaskList () {
   $(".js-next").on("click", function (event) {
     var nextId = parseInt($(".js-next").attr("data-id")) + 2;
+    window.history.pushState('page2', 'Title', '/lists/' + nextId);
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
       var date = list["due_date"]
@@ -53,16 +58,33 @@ function nextTaskList () {
       $(".list-name").text(list["name"])
       $(".due-date").text(dateParser(date))
       $(".js-next").attr("data-id", list["id"]);
-      getTaskInfo(tasks);
-    });
+      getTaskInfo(tasks, list);
+    })
+    .fail(function(){
+      alert("error")
+    })
     event.preventDefault();
   });
 }
 
-function getTaskInfo (tasks) {
+function getTaskInfo (tasks, list) {
+
   for (i = 0; i < tasks.length; i++){
 
-    $(".task-name").text(tasks[i].name)
+    var complete = "";
+
+    if (tasks[i].complete) {
+      complete = "checked='checked'"
+    } else {
+      complete = ""
+    }
+
+    var editButton = "<form class='button_to' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='test'></form>";
+
+    var completeButton = "<div style='float:right;'><p class='task-list-text display-inline'><input type='checkbox' name='completed?'id='task_complete'value='1' disabled='disabled'" +  complete + "></p></div>";
+
+    $(".test123").append("<li><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p></li>" + editButton + completeButton)
+
   }
 
 }
