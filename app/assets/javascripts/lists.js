@@ -14,10 +14,8 @@ function dateParser(date) {
   var day = date.getUTCDate();
 
   function formatDay (day) {
-    console.log("inside function " + day)
     var string = "0"
     if (day < 10) {
-      console.log("inside if 1")
       currentDay = day.toString();
       string += currentDay
       return string
@@ -26,7 +24,7 @@ function dateParser(date) {
     }
   }
 
-  console.log("formatter" + formatDay(day))
+
   var monthIndex = date.getUTCMonth();
 
   var year = date.getUTCFullYear();
