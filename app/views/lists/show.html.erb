@@ -9,9 +9,13 @@
       <div>
         <h1 class="list-name log-in text-center"><%= @list.name %></h1>
         <hr>
+        <div class="clearfix">
+          <a href="#" class="js-next text-center form-control btn-main sign-up next-button" data-id="<%=@list.id%>">Next List</a>
+        </div>
         <p class="task-list-text"><span class="bold-text">Due Date: </span><span class="float-right due-date"><%= @list.due_date.strftime("%B %d, %Y")%></span></p>
         <p class="task-list-text"><span class="border-bottom bold-text">Tasks</span><span class="task-list-tesk float-right border-bottom bold-text">Completed?</span></p>
 
+        <div class="test123">
         <% @list.tasks.each do |task| %>
           <ul>
             <li class="over-flow">
@@ -19,7 +23,7 @@
               <p class="task-name task-list-text display-inline"><%= task.name %></p>
 
 
-              <div style="float:right;">
+              <div class="float-right">
                 <p class="task-list-text display-inline"><%= check_box_tag 'completed?', 1, task.complete, disabled: true, id: "task_complete" %></p>
               </div>
 
@@ -31,12 +35,10 @@
             </li>
           </ul>
         <% end %>
-        <%= link_to "New Task", new_list_task_path(@list), method: 'get', class: "text-center form-control btn-main margin-top-25"%>
-         <a href="#" class="js-next text-center form-control btn-main sign-up" data-id="<%=@list.id%>">Next Task List</a>
-         <div>
-           <ul class="test123">
-           </ul>
-         </div>
+      </div>
+        <a href="#" class="js-next text-center form-control btn-main margin-top-25" data-id="<%=@list.id%>">New Task</a>
+        <!-- <%= link_to "New Task", new_list_task_path(@list), method: 'get', class: "text-center form-control btn-main margin-top-25"%> -->
+
       </div>
     </div>
   </div>
@@ -51,25 +53,17 @@ function nextTaskList () {
   $(".js-next").on("click", function (event) {
 
     var getId = parseInt($(".js-next").attr("data-id"))
-    // var nextId = parseInt($(".js-next").attr("data-id")) + 1;
 
 
     var listIdChecker = <%= @listid %>
-    console.log("array = "+ listIdChecker)
 
     var currentId=listIdChecker.indexOf(getId)
 
-    console.log("current array index = " + currentId)
     var nextId = listIdChecker[currentId+1]
 
     if (listIdChecker.length - 1 === currentId ) {
       nextId = listIdChecker[0]
     }
-
-
-
-
-
 
     var setId = $(".js-next").attr("data-id", nextId)
 
@@ -100,9 +94,9 @@ function nextTaskList () {
 }
 
 function getTaskInfo (tasks, list) {
-
-  for (i = 0; i < tasks.length; i++){
     token = '<%= form_authenticity_token %>';
+  for (i = 0; i < tasks.length; i++){
+
 
     var complete = "";
 
@@ -113,11 +107,12 @@ function getTaskInfo (tasks, list) {
     }
     thislistId = list.id
     var deleteButton = "<form class='button_to' method='post' action='/lists/" + list.id + "/tasks/" + tasks[i].id + "'><input type='hidden' name='_method' value='delete'><input class='button-small btn' type='submit' value='Delete'><input type='hidden' name='authenticity_token' value=" + token + "></form>"
-    var editButton = "<form class='button_to' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='edit'></form>";
 
-    var completeButton = "<div style='float:right;'><p class='task-list-text display-inline'><input type='checkbox' name='completed?'id='task_complete'value='1' disabled='disabled'" +  complete + "></p></div>";
+    var editButton = "<form class='button_to margin-right-5' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='Edit'></form>";
 
-    $(".test123").append("<li><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p></li>" + editButton + completeButton + deleteButton)
+    var completeButton = "<div class='float-right'><p class='task-list-text display-inline'><input type='checkbox' name='completed?'id='task_complete'value='1' disabled='disabled'" +  complete + "></p></div>";
+
+    $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton + "<div role='group' aria-label='...'>" +  editButton  + deleteButton + "</div></li></ul>")
 
   }
 
