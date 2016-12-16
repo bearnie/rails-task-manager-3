@@ -49,9 +49,37 @@ $(function () {
 
 function nextTaskList () {
   $(".js-next").on("click", function (event) {
-    var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+
+    var getId = parseInt($(".js-next").attr("data-id"))
+    // var nextId = parseInt($(".js-next").attr("data-id")) + 1;
+
+
+    var listIdChecker = <%= @listid %>
+    console.log("array = "+ listIdChecker)
+
+    var currentId=listIdChecker.indexOf(getId)
+
+    console.log("current array index = " + currentId)
+    var nextId = listIdChecker[currentId+1]
+
+    if (listIdChecker.length - 1 === currentId ) {
+      nextId = listIdChecker[0]
+    }
+
+
+
+
+
+
     var setId = $(".js-next").attr("data-id", nextId)
+
+
+    console.log("setting button to " + nextId)
+    $(".test123").html("");
+
+
     window.history.pushState('page2', 'Title', '/lists/' + nextId);
+
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
       var date = list["due_date"]

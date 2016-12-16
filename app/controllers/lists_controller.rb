@@ -6,6 +6,7 @@ class ListsController < ApplicationController
   end
 
   def show
+    @listid = current_user.lists.pluck(:id)
     @list = current_user.lists.find(params[:id])
     respond_to do |format|
       format.html { render :show}
