@@ -16,7 +16,7 @@
           <ul>
             <li class="over-flow">
 
-              <p class="task-list-text display-inline"><%= task.name %></p>
+              <p class="task-name task-list-text display-inline"><%= task.name %></p>
 
 
               <div style="float:right;">
@@ -49,17 +49,22 @@ function nextTaskList () {
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
       var date = list["due_date"]
+      var tasks = list["tasks"]
       $(".list-name").text(list["name"])
       $(".due-date").text(dateParser(date))
       $(".js-next").attr("data-id", list["id"]);
-      getTaskInfo(nextId);
+      getTaskInfo(tasks);
     });
     event.preventDefault();
   });
 }
 
-function getTaskInfo (listId) {
-console.log("hi")
+function getTaskInfo (tasks) {
+  for (i = 0; i < tasks.length; i++){
+
+    $(".task-name").text(tasks[i].name)
+  }
+
 }
 
 </script>
