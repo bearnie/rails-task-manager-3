@@ -102,6 +102,7 @@ function nextTaskList () {
 function getTaskInfo (tasks, list) {
 
   for (i = 0; i < tasks.length; i++){
+    token = '<%= form_authenticity_token %>';
 
     var complete = "";
 
@@ -110,12 +111,13 @@ function getTaskInfo (tasks, list) {
     } else {
       complete = ""
     }
-
-    var editButton = "<form class='button_to' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='test'></form>";
+    thislistId = list.id
+    var deleteButton = "<form class='button_to' method='post' action='/lists/" + list.id + "/tasks/" + tasks[i].id + "'><input type='hidden' name='_method' value='delete'><input class='button-small btn' type='submit' value='Delete'><input type='hidden' name='authenticity_token' value=" + token + "></form>"
+    var editButton = "<form class='button_to' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='edit'></form>";
 
     var completeButton = "<div style='float:right;'><p class='task-list-text display-inline'><input type='checkbox' name='completed?'id='task_complete'value='1' disabled='disabled'" +  complete + "></p></div>";
 
-    $(".test123").append("<li><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p></li>" + editButton + completeButton)
+    $(".test123").append("<li><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p></li>" + editButton + completeButton + deleteButton)
 
   }
 
