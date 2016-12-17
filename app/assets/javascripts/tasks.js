@@ -20,17 +20,17 @@ function completeButton(task) {
 
 }
 
-function deleteButton (task, token) {
+function deleteButton (listId, taskId, token) {
 
-  var myDeleteButton = "<form class='button_to' method='post' action='/lists/" + task.list.id + "/tasks/" + task.id + "'><input type='hidden' name='_method' value='delete'><input class='button-small btn' type='submit' value='Delete'><input type='hidden' name='authenticity_token' value=" + token + "></form>"
+  var myDeleteButton = "<form class='button_to' method='post' action='/lists/" + listId + "/tasks/" + taskId + "'><input type='hidden' name='_method' value='delete'><input class='button-small btn' type='submit' value='Delete'><input type='hidden' name='authenticity_token' value=" + token + "></form>"
 
   return myDeleteButton
 
 }
 
-function editButton (task) {
+function editButton (listId, taskId) {
 
-  var myEditButton = "<form class='button_to margin-right-5' method='get' action='/lists/" + task.list.id  + "/tasks/" + task.id + "/edit'><input class='button-small btn light-green' type='submit' value='Edit'></form>";
+  var myEditButton = "<form class='button_to margin-right-5' method='get' action='/lists/" + listId  + "/tasks/" + taskId + "/edit'><input class='button-small btn light-green' type='submit' value='Edit'></form>";
 
   return myEditButton
 }

@@ -102,24 +102,11 @@ function nextTaskList () {
 }
 
 function getTaskInfo (tasks, list) {
-    token = '<%= form_authenticity_token %>';
+
+  token = '<%= form_authenticity_token %>';
   for (i = 0; i < tasks.length; i++){
 
-    var complete = "";
-
-    if (tasks[i].complete) {
-      complete = "checked='checked'"
-    } else {
-      complete = ""
-    }
-
-    var deleteButton = "<form class='button_to' method='post' action='/lists/" + list.id + "/tasks/" + tasks[i].id + "'><input type='hidden' name='_method' value='delete'><input class='button-small btn' type='submit' value='Delete'><input type='hidden' name='authenticity_token' value=" + token + "></form>"
-
-    var editButton = "<form class='button_to margin-right-5' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='Edit'></form>";
-
-
-
-    $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton  + deleteButton + "</div></li></ul>")
+    $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton(list.id,tasks[i].id)  + deleteButton(list.id,tasks[i].id, token) + "</div></li></ul>")
 
   }
 
@@ -140,7 +127,7 @@ function newTask () {
       token = '<%= form_authenticity_token %>';
 
 
-      $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + task.name + "</p>" + completeButton(task) + "<div role='group' aria-label='...'>" +  editButton (task) + deleteButton (task, token) + "</div></li></ul>")
+      $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + task.name + "</p>" + completeButton(task) + "<div role='group' aria-label='...'>" +  editButton(task.list.id, task.id) + deleteButton(task.list.id, task.id, token) + "</div></li></ul>")
 
 
 
