@@ -1,3 +1,8 @@
+function List(){
+  
+}
+
+
 
 function dateParser(date) {
   var monthNames = [
@@ -8,9 +13,7 @@ function dateParser(date) {
   ];
 
   var date = new Date(date);
-
   var utcDate = date.toUTCString()
-
   var day = date.getUTCDate();
 
   function formatDay (day) {
@@ -24,11 +27,8 @@ function dateParser(date) {
     }
   }
 
-
   var monthIndex = date.getUTCMonth();
-
   var year = date.getUTCFullYear();
-
   var finalString = (monthNames[monthIndex] + " " + formatDay(day) + ", " + year.toString());
 
   return finalString
