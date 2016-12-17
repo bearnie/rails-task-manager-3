@@ -52,8 +52,9 @@
 <script type="text/javascript" charset="utf-8">
 
 $(function () {
+  token = '<%= form_authenticity_token %>';
   nextTaskList();
-  newTaskShow();
+  newTaskShow(token);
   newTask();
 });
 

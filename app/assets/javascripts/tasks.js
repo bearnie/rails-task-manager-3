@@ -1,6 +1,12 @@
-function newTaskShow () {
+function newTaskShow (token) {
   $(".new-task").on("click", function (event) {
     event.preventDefault();
+    currentUrlId = window.location.pathname
+    console.log(currentUrlId)
+    console.log(token)
+    var createForm = "<form class='task-form' id='new_task' action='" + currentUrlId + "/tasks' accept-charset='UTF-8' method='post'><input name='utf8' type='hidden' value='✓'><input type='hidden' name='authenticity_token' value='" + token + "'><input placeholder='Name' class='form-control' type='text' name='task[name]' id='task_name'><p><span class='task-list-text complete-text'>Complete?   </span><input name='task[complete]' type='hidden' value='0'><input type='checkbox' value='1' name='task[complete]' id='task_complete'></p><input type='submit' name='commit' value='Create Task' class='form-control btn-main sign-up'></form>"
+    $(".create-task").append(createForm)
+    console.log(createForm)
     $(".create-task").show(1000);
   });
 }
