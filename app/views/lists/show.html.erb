@@ -15,7 +15,7 @@
         <p class="task-list-text"><span class="bold-text">Due Date: </span><span class="float-right due-date"><%= @list.due_date.strftime("%B %d, %Y")%></span></p>
         <p class="task-list-text"><span class="border-bottom bold-text">Tasks</span><span class="task-list-tesk float-right border-bottom bold-text">Completed?</span></p>
 
-        <div class="test123">
+        <div class="task-div">
         <% @list.tasks.each do |task| %>
           <ul>
             <li class="over-flow">
@@ -36,18 +36,16 @@
           </ul>
         <% end %>
       </div>
+
+      </div>
+
+      <div class="new-task-div">
+      </div>
       <div class="create-task">
       <h1 class="text-center log-in">Create Your Task</h1>
       <%= render 'tasks/form' %>
       </div>
         <a href="#" class="new-task text-center form-control btn-main margin-top-25" data-id="<%=@list.id%>">New Task</a>
-        <!-- <%= link_to "New Task", new_list_task_path(@list), method: 'get', class: "text-center form-control btn-main margin-top-25"%> -->
-
-
-
-
-
-      </div>
     </div>
   </div>
 </div>
@@ -78,7 +76,7 @@ function nextTaskList () {
     var setId = $(".js-next").attr("data-id", nextId)
 
 
-    $(".test123").html("");
+    $(".task-div").html("");
 
 
     window.history.pushState('page2', 'Title', '/lists/' + nextId);
@@ -106,7 +104,7 @@ function getTaskInfo (tasks, list) {
   token = '<%= form_authenticity_token %>';
   for (i = 0; i < tasks.length; i++){
 
-    $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton(list.id,tasks[i].id)  + deleteButton(list.id,tasks[i].id, token) + "</div></li></ul>")
+    $(".task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton(list.id,tasks[i].id)  + deleteButton(list.id,tasks[i].id, token) + "</div></li></ul>")
 
   }
 
@@ -115,22 +113,19 @@ function getTaskInfo (tasks, list) {
 function newTask () {
   $('form.task-form').submit(function(event) {
     event.preventDefault();
+    token = '<%= form_authenticity_token %>';
 
     var values = $(this).serialize();
     var posting = $.post('/lists/17/tasks', values);
 
-    posting.done(function(data){
+    posting.done(function(data,token){
 
       $(".create-task").hide(1000);
       var task = data;
 
-      token = '<%= form_authenticity_token %>';
 
 
-      $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + task.name + "</p>" + completeButton(task) + "<div role='group' aria-label='...'>" +  editButton(task.list.id, task.id) + deleteButton(task.list.id, task.id, token) + "</div></li></ul>")
-
-
-
+      $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + task.name + "</p>" + completeButton(task) + "<div role='group' aria-label='...'>" +  editButton(task.list.id, task.id) + deleteButton(task.list.id, task.id, token) + "</div></li></ul>")
 
 
     })
