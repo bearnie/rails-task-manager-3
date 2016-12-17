@@ -117,24 +117,35 @@ function getTaskInfo (tasks, list) {
 
     var editButton = "<form class='button_to margin-right-5' method='get' action='/lists/" + list.id  + "/tasks/" + tasks[i].id + "/edit'><input class='button-small btn light-green' type='submit' value='Edit'></form>";
 
-    var completeButton = "<div class='float-right'><p class='task-list-text display-inline'><input type='checkbox' name='completed?'id='task_complete'value='1' disabled='disabled'" +  complete + "></p></div>";
 
-    $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton + "<div role='group' aria-label='...'>" +  editButton  + deleteButton + "</div></li></ul>")
+
+    $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton  + deleteButton + "</div></li></ul>")
 
   }
 
 }
 
 function newTask () {
-  $('form').submit(function(event) {
+  $('form.task-form').submit(function(event) {
     event.preventDefault();
+
     var values = $(this).serialize();
-    console.log(values)
     var posting = $.post('/lists/17/tasks', values);
 
     posting.done(function(data){
+
+      $(".create-task").hide(1000);
       var task = data;
-      console.log(task.list.id)
+
+      token = '<%= form_authenticity_token %>';
+
+
+      $(".test123").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + task.name + "</p>" + completeButton(task) + "<div role='group' aria-label='...'>" +  editButton (task) + deleteButton (task, token) + "</div></li></ul>")
+
+
+
+
+
     })
 
 
