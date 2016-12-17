@@ -43,7 +43,7 @@
       </div>
       <div class="create-task">
       <h1 class="text-center log-in">Create Your Task</h1>
-      <%= render 'tasks/form' %>
+
       </div>
         <a href="#" class="new-task text-center form-control btn-main margin-top-25" data-id="<%=@list.id%>">New Task</a>
     </div>
@@ -55,12 +55,15 @@ $(function () {
   token = '<%= form_authenticity_token %>';
   nextTaskList();
   newTaskShow(token);
-  newTask();
+
 });
 
 function nextTaskList () {
   $(".js-next").on("click", function (event) {
-
+    $(".new-task-div").html("")
+        $(".create-task").html("")
+    token = '<%= form_authenticity_token %>';
+    newTaskShow(token);
     var getId = parseInt($(".js-next").attr("data-id"))
 
 
@@ -78,6 +81,7 @@ function nextTaskList () {
 
 
     $(".task-div").html("");
+
 
 
     window.history.pushState('page2', 'Title', '/lists/' + nextId);
@@ -105,7 +109,7 @@ function getTaskInfo (tasks, list) {
   token = '<%= form_authenticity_token %>';
   for (i = 0; i < tasks.length; i++){
 
-    $(".task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton(list.id,tasks[i].id)  + deleteButton(list.id,tasks[i].id, token) + "</div></li></ul>")
+    $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton(list.id,tasks[i].id)  + deleteButton(list.id,tasks[i].id, token) + "</div></li></ul>")
 
   }
 
@@ -113,15 +117,18 @@ function getTaskInfo (tasks, list) {
 
 function newTask () {
   $('form.task-form').submit(function(event) {
+    console.log("subbmitted form")
     event.preventDefault();
     token = '<%= form_authenticity_token %>';
 
     var values = $(this).serialize();
-    var posting = $.post('/lists/17/tasks', values);
+    currentUrlId = window.location.pathname
+    var posting = $.post(currentUrlId + '/tasks', values);
 
     posting.done(function(data,token){
 
-      $(".create-task").hide(1000);
+      $(".create-task").hide(1000)
+
       var task = data;
 
 
