@@ -60,6 +60,9 @@ $(function () {
 
 function nextTaskList () {
   $(".js-next").on("click", function (event) {
+    event.preventDefault();
+
+
     $(".new-task-div").html("")
     $(".create-task").html("")
     token = '<%= form_authenticity_token %>';
@@ -80,20 +83,19 @@ function nextTaskList () {
     var setId = $(".js-next").attr("data-id", nextId)
 
 
-    $(".task-div").html("");
-
-
-
     window.history.pushState('next', 'Title', '/lists/' + nextId);
 
+
     $.get("/lists/" + nextId + ".json", function(data) {
+
+
       var list = data;
 
       var date = list["due_date"]
       var name = list["name"]
       var listId = list["id"]
       var tasks = list["tasks"]
-      console.log(tasks)
+
       var newList = new List(name, date, listId)
 
       $(".list-name").text(newList.name)
@@ -102,25 +104,28 @@ function nextTaskList () {
       $(".js-next").attr("data-id", newList.id);
 
       getTaskInfo(tasks, newList);
+
+
+
     })
     .fail(function(){
 
       alert("sorry")
     })
-    event.preventDefault();
+
   });
 }
 
 function getTaskInfo (tasks, list) {
+   $(".task-div").html("");
 
   token = '<%= form_authenticity_token %>';
+
   for (i = 0; i < tasks.length; i++){
 
     var newTask = new Task(tasks[i].name, tasks[i].complete, tasks[i].id)
 
-
-    $(".new-task-div").append(appendNewTask (newTask, list.id, token))
-
+    $(".task-div").append(appendNewTask (newTask, list.id, token))
 
   }
 
