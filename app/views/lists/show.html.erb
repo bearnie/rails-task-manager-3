@@ -118,7 +118,9 @@ function getTaskInfo (tasks, list) {
 
     var newTask = new Task(tasks[i].name, tasks[i].complete, tasks[i].id)
 
-    $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + newTask.name + "</p>" + completeButton(newTask) + "<div role='group' aria-label='...'>" +  editButton(list.id,newTask.id)  + deleteButton(list.id,newTask.id, token) + "</div></li></ul>")
+
+    $(".new-task-div").append(appendNewTask (newTask, list.id, token))
+
 
   }
 
@@ -142,9 +144,7 @@ function newTask () {
 
       var newTasks = new Task(myTask.name, myTask.complete, myTask.id)
 
-      $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + newTasks.name + "</p>" + completeButton(newTasks) + "<div role='group' aria-label='...'>" +  editButton(myTask.list.id, newTasks.id) + deleteButton(myTask.list.id, newTasks.id, token) + "</div></li></ul>")
-
-
+      $(".new-task-div").append(appendNewTask (newTasks, myTask.list.id, token ))
     })
 
 

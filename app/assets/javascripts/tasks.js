@@ -47,3 +47,7 @@ function editButton (listId, taskId) {
 
   return myEditButton
 }
+
+function appendNewTask (task, listId, token) {
+  return "<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + task.name + "</p>" + completeButton(task) + "<div role='group' aria-label='...'>" +  editButton(listId,task.id)  + deleteButton(listId,task.id, token) + "</div></li></ul>"
+}
