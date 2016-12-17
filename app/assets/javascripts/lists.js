@@ -1,5 +1,20 @@
-function List(){
-  
+function List(name, date){
+  this.name = name;
+  this.due_date = date;
+  this.date = function() {
+    var monthNames = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+    ];
+    var date = new Date(date);
+    var utcDate = date.toUTCString()
+    var day = date.getUTCDate();
+  }
+  this.formatDate = function () {
+    
+  }
 }
 
 

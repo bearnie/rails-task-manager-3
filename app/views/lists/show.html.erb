@@ -88,10 +88,13 @@ function nextTaskList () {
 
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
-      console.log(data)
+
       var date = list["due_date"]
+      var name = list["name"]
       var tasks = list["tasks"]
-      $(".list-name").text(list["name"])
+      var newList = new List(name, date)
+      console.log("object name = " + newList.name)
+      $(".list-name").text(newList.name)
       $(".due-date").text(dateParser(date))
       $(".js-next").attr("data-id", list["id"]);
       getTaskInfo(tasks, list);
