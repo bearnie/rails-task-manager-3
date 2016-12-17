@@ -93,6 +93,7 @@ function nextTaskList () {
       var name = list["name"]
       var listId = list["id"]
       var tasks = list["tasks"]
+      console.log(tasks)
       var newList = new List(name, date, listId)
 
       $(".list-name").text(newList.name)
@@ -114,7 +115,7 @@ function getTaskInfo (tasks, list) {
 
   token = '<%= form_authenticity_token %>';
   for (i = 0; i < tasks.length; i++){
-    
+
     var newTask = new Task(tasks[i].name, tasks[i].complete, tasks[i].id)
 
     $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + newTask.name + "</p>" + completeButton(newTask) + "<div role='group' aria-label='...'>" +  editButton(list.id,newTask.id)  + deleteButton(list.id,newTask.id, token) + "</div></li></ul>")
@@ -127,21 +128,21 @@ function newTask () {
   $('form.task-form').submit(function(event) {
     console.log("subbmitted form")
     event.preventDefault();
-    token = '<%= form_authenticity_token %>';
 
     var values = $(this).serialize();
     currentUrlId = window.location.pathname
     var posting = $.post(currentUrlId + '/tasks', values);
 
-    posting.done(function(data,token){
+    posting.done(function(data){
+      token = '<%= form_authenticity_token %>';
 
       $(".create-task").hide(1000)
 
-      var task = data;
+      var myTask = data;
 
+      var newTasks = new Task(myTask.name, myTask.complete, myTask.id)
 
-
-      $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + task.name + "</p>" + completeButton(task) + "<div role='group' aria-label='...'>" +  editButton(task.list.id, task.id) + deleteButton(task.list.id, task.id, token) + "</div></li></ul>")
+      $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + newTasks.name + "</p>" + completeButton(newTasks) + "<div role='group' aria-label='...'>" +  editButton(myTask.list.id, newTasks.id) + deleteButton(myTask.list.id, newTasks.id, token) + "</div></li></ul>")
 
 
     })
