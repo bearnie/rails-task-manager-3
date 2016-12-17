@@ -61,11 +61,11 @@ $(function () {
 function nextTaskList () {
   $(".js-next").on("click", function (event) {
     $(".new-task-div").html("")
-        $(".create-task").html("")
+    $(".create-task").html("")
     token = '<%= form_authenticity_token %>';
     newTaskShow(token);
-    var getId = parseInt($(".js-next").attr("data-id"))
 
+    var getId = parseInt($(".js-next").attr("data-id"))
 
     var listIdChecker = <%= @listid %>
 
@@ -84,21 +84,23 @@ function nextTaskList () {
 
 
 
-    window.history.pushState('page2', 'Title', '/lists/' + nextId);
+    window.history.pushState('next', 'Title', '/lists/' + nextId);
 
     $.get("/lists/" + nextId + ".json", function(data) {
       var list = data;
 
       var date = list["due_date"]
       var name = list["name"]
+      var listId = list["id"]
       var tasks = list["tasks"]
-      var newList = new List(name, date)
-      console.log("Does the date work? " + newList.date())
-      console.log("object name = " + newList.name)
+      var newList = new List(name, date, listId)
+
       $(".list-name").text(newList.name)
       $(".due-date").text(newList.date())
-      $(".js-next").attr("data-id", list["id"]);
-      getTaskInfo(tasks, list);
+
+      $(".js-next").attr("data-id", newList.id);
+
+      getTaskInfo(tasks, newList);
     })
     .fail(function(){
 
@@ -112,8 +114,10 @@ function getTaskInfo (tasks, list) {
 
   token = '<%= form_authenticity_token %>';
   for (i = 0; i < tasks.length; i++){
+    
+    var newTask = new Task(tasks[i].name, tasks[i].complete, tasks[i].id)
 
-    $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + tasks[i].name + "</p>" + completeButton(tasks[i]) + "<div role='group' aria-label='...'>" +  editButton(list.id,tasks[i].id)  + deleteButton(list.id,tasks[i].id, token) + "</div></li></ul>")
+    $(".new-task-div").append("<ul><li class='over-flow'><p class='task-name task-list-text display-inline'>" + newTask.name + "</p>" + completeButton(newTask) + "<div role='group' aria-label='...'>" +  editButton(list.id,newTask.id)  + deleteButton(list.id,newTask.id, token) + "</div></li></ul>")
 
   }
 
