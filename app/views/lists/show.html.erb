@@ -93,9 +93,10 @@ function nextTaskList () {
       var name = list["name"]
       var tasks = list["tasks"]
       var newList = new List(name, date)
+      console.log("Does the date work? " + newList.date())
       console.log("object name = " + newList.name)
       $(".list-name").text(newList.name)
-      $(".due-date").text(dateParser(date))
+      $(".due-date").text(newList.date())
       $(".js-next").attr("data-id", list["id"]);
       getTaskInfo(tasks, list);
     })
