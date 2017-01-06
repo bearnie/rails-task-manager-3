@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4 col-sm-12 bg-white">
+
+
+      <div>
+        <h1 class="log-in text-center">Overdue Task List</h1>
+        <hr>
+       <% @lists.each do |list| %>
+          <ul>
+            <li class="over-flow">
+              <p class="task-list-text display-inline"><%= list.name %></p>
+
+              <div class="float-right">
+                <p class="task-list-text display-inline">Due Date</p>
+              </div>
+
+              <div role="group" aria-label="...">
+                <%= button_to "View Tasks", list_path(list), method: 'get', class: "button-small btn light-blue"%>
+                <%= button_to "Edit", edit_list_path(list), method: 'get', class: "button-small btn light-green"%>
+                <%= button_to "Delete", list_path(list), method: 'delete', class: "button-small btn"%>
+                <p class="task-list-text due-date display-inline"><%= list.due_date.strftime("%B %d, %Y")%></p>
+              </div>
+            </li>
+          </ul>
+
+        <% end %>
+        
+      </div>
+    </div>
+  </div>
+</div>
